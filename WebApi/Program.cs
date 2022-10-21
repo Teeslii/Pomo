@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using WebApi.DBOperations;
 
@@ -9,6 +10,9 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<PomoDbContext>(options => 
    options.UseSqlServer(builder.Configuration.GetConnectionString("MasterDatabase")));
+builder.Services.AddScoped<IPomoDbContext>(provider => provider.GetService<PomoDbContext>());
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -12,5 +12,7 @@ namespace WebApi.DBOperations
         DbSet<User> Users { get; set; }
         DbSet<Pomodoro> Pomodoros { get; set; }
         DbSet<MinuteSet> MinuteSets { get; set; }
+
+        int SaveChanges();
     }
 }
