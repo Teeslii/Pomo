@@ -1,12 +1,19 @@
 using System.Reflection;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using WebApi.DBOperations;
+using WebApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(x =>
+{
+    x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+
+    x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+});
 
 builder.Services.AddDbContext<PomoDbContext>(options => 
    options.UseSqlServer(builder.Configuration.GetConnectionString("MasterDatabase")));
@@ -30,6 +37,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.MapControllers();
 
