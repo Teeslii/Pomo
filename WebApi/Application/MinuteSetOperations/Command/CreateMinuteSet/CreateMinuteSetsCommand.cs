@@ -13,10 +13,10 @@ namespace WebApi.Application.MinuteSetOperations.Command
    
     public class CreateMinuteSetsCommand
     {
-         private readonly IPomoDbContext _dbContext;
+         private readonly PomoDbContext _dbContext;
          private readonly IMapper _mapper;
          public CreateMinuteSetsViewModel viewModel { get; set; }
-         public CreateMinuteSetsCommand(IPomoDbContext dbContext, IMapper mapper)
+         public CreateMinuteSetsCommand(PomoDbContext dbContext, IMapper mapper)
          {
             _dbContext = dbContext;
             _mapper = mapper;

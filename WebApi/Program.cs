@@ -17,7 +17,7 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 
 builder.Services.AddDbContext<PomoDbContext>(options => 
    options.UseSqlServer(builder.Configuration.GetConnectionString("MasterDatabase")));
-builder.Services.AddScoped<IPomoDbContext>(provider => provider.GetService<PomoDbContext>());
+
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

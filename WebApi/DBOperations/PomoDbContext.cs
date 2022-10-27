@@ -7,7 +7,7 @@ using WebApi.Entities;
 
 namespace WebApi.DBOperations
 {
-    public class PomoDbContext : DbContext, IPomoDbContext
+    public class PomoDbContext : DbContext
     {
         public PomoDbContext(DbContextOptions options): base(options)
         {
@@ -17,9 +17,6 @@ namespace WebApi.DBOperations
         public DbSet<Pomodoro> Pomodoros { get; set; }
         public DbSet<MinuteSet> MinuteSets { get; set; }
 
-        public override int SaveChanges()
-        {
-            return base.SaveChanges();
-        }
+        
     }
 }

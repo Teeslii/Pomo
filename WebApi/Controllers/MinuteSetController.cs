@@ -16,10 +16,10 @@ namespace WebApi.Controllers
     [Route("[controller]")]
     public class MinuteSetController : Controller 
     {
-        private readonly IPomoDbContext _dbcontext;
+        private readonly PomoDbContext _dbcontext;
         private readonly IMapper _mapper; 
         
-        public MinuteSetController(IPomoDbContext dbContext, IMapper mapper)
+        public MinuteSetController(PomoDbContext dbContext, IMapper mapper)
         {
             _dbcontext = dbContext;
             _mapper = mapper;

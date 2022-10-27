@@ -9,9 +9,9 @@ namespace WebApi.Application.MinuteSetOperations.Queries
 {
     public class GetMinuteSetsQuery
     {
-        private readonly IPomoDbContext _dbContext;
+        private readonly PomoDbContext _dbContext;
         private readonly IMapper _mapper;
-        public GetMinuteSetsQuery(IPomoDbContext dbContext, IMapper mapper)
+        public GetMinuteSetsQuery(PomoDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
