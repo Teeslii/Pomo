@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers().AddJsonOptions(x =>
 {
-    x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+   // Şuan için gerek yok x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 
     x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
 });

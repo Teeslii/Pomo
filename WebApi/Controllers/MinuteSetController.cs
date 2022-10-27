@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Application.MinuteSetOperations.Command;
+using WebApi.Application.MinuteSetOperations.Command.CreateMinuteSet;
 using WebApi.Application.MinuteSetOperations.Queries;
 using WebApi.DBOperations;
 
@@ -31,6 +34,20 @@ namespace WebApi.Controllers
 
             return Ok(result);
             
+        }
+
+        [HttpPost]
+        public IActionResult CreateMinuteSets([FromBody] CreateMinuteSetsViewModel model)
+        {
+            CreateMinuteSetsCommand command = new CreateMinuteSetsCommand(_dbcontext, _mapper);
+            command.viewModel = model;
+
+            CreateMinuteSetCommandValidator validator = new CreateMinuteSetCommandValidator();
+            validator.ValidateAndThrow(command);
+
+            command.Handle();
+
+            return Ok();
         }
 
     }
