@@ -11,12 +11,12 @@ using WebApi.Entities;
 namespace WebApi.Application.MinuteSetOperations.Command
 {
    
-    public class CreateMinuteSetsCommand
+    public class CreateMinuteSetCommand
     {
          private readonly PomoDbContext _dbContext;
          private readonly IMapper _mapper;
          public CreateMinuteSetsViewModel viewModel { get; set; }
-         public CreateMinuteSetsCommand(PomoDbContext dbContext, IMapper mapper)
+         public CreateMinuteSetCommand(PomoDbContext dbContext, IMapper mapper)
          {
             _dbContext = dbContext;
             _mapper = mapper;

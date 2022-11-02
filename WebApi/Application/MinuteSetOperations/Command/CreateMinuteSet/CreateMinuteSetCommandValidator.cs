@@ -6,7 +6,7 @@ using FluentValidation;
 
 namespace WebApi.Application.MinuteSetOperations.Command.CreateMinuteSet
 {
-    public class CreateMinuteSetCommandValidator : AbstractValidator<CreateMinuteSetsCommand>
+    public class CreateMinuteSetCommandValidator : AbstractValidator<CreateMinuteSetCommand>
     {
         public CreateMinuteSetCommandValidator()
         {
