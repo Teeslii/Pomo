@@ -13,6 +13,6 @@ namespace WebApi.Entities
         public int Id { get; set; }
         public int Minute { get; set; }
 
-        public ICollection<Pomodoro> Pomodoros { get; set; }
+        public ICollection<Process> processes { get; set; }
     }
 }

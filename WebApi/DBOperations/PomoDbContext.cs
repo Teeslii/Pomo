@@ -14,7 +14,7 @@ namespace WebApi.DBOperations
 
         }
         public DbSet<User> Users { get; set; }
-        public DbSet<Pomodoro> Pomodoros { get; set; }
+        public DbSet<Process> processes { get; set; }
         public DbSet<MinuteSet> MinuteSets { get; set; }
 
         
