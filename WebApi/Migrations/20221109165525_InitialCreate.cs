@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -36,27 +37,30 @@ namespace WebApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pomodoros",
+                name: "Processes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DurationInMinutes = table.Column<int>(type: "int", nullable: false),
-                    PauseInMinutes = table.Column<bool>(type: "bit", nullable: false),
+                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StopTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    MinuteTypeId = table.Column<int>(type: "int", nullable: false),
+                    MinuteType = table.Column<int>(type: "int", nullable: false),
                     MinuteSetId = table.Column<int>(type: "int", nullable: false),
+                    IsCompleted = table.Column<bool>(type: "bit", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pomodoros", x => x.Id);
+                    table.PrimaryKey("PK_Processes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Pomodoros_MinuteSets_MinuteSetId",
+                        name: "FK_Processes_MinuteSets_MinuteSetId",
                         column: x => x.MinuteSetId,
                         principalTable: "MinuteSets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Pomodoros_Users_UserId",
+                        name: "FK_Processes_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -64,20 +68,20 @@ namespace WebApi.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pomodoros_MinuteSetId",
-                table: "Pomodoros",
+                name: "IX_Processes_MinuteSetId",
+                table: "Processes",
                 column: "MinuteSetId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pomodoros_UserId",
-                table: "Pomodoros",
+                name: "IX_Processes_UserId",
+                table: "Processes",
                 column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Pomodoros");
+                name: "Processes");
 
             migrationBuilder.DropTable(
                 name: "MinuteSets");
