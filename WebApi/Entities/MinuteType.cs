@@ -1,8 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace WebApi.Entities
 {
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum MinuteType
     {
-        MinutePomodoro = 0,
-        MinuteBreak = 1
+        Pomodoro, Break
     }
 }

@@ -6,6 +6,7 @@ using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Application.ProcessOperations.Command;
+using WebApi.Application.ProcessOperations.Queries.GetProcessByUserId;
 using WebApi.DBOperations;
 
 namespace WebApi.Controllers
@@ -36,6 +37,22 @@ namespace WebApi.Controllers
             command.Handle();
             
             return Ok();
+        }
+
+        [HttpGet("{userId}")]
+        public IActionResult GetProcessByUserIdDetail(int userId)
+        {
+            GetProcessByUserIdQuery query = new GetProcessByUserIdQuery(_dbContext, _mapper);
+            query.UserId = userId;
+
+            GetProcessByUserIdQueryValidator validator = new GetProcessByUserIdQueryValidator();
+            validator.ValidateAndThrow(query);
+
+            var result = query.Handler();
+
+
+
+            return Ok(result);
         }
 
     }
