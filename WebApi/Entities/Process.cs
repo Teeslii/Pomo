@@ -7,8 +7,7 @@ namespace WebApi.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public DateTime StartTime { get; set; }
-        public DateTime StopTime { get; set; }
-        public int MinuteTypeId { get; set;}
+        public DateTime EndTime { get; set; }
         public MinuteType MinuteType { get; set;}
         public int MinuteSetId { get; set;}
         public MinuteSet MinuteSet { get; set;}

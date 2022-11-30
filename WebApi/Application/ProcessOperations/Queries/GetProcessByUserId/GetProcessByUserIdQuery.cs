@@ -35,7 +35,7 @@ namespace WebApi.Application.ProcessOperations.Queries.GetProcessByUserId
     {
         public int UserId { get; set; }
         public DateTime StartTime { get; set; }
-        public DateTime StopTime { get; set; }
+        public DateTime EndTime { get; set; }
         public string MinuteType { get; set;}
         public int MinuteSet { get; set;}
         public Boolean IsCompleted  { get; set; }

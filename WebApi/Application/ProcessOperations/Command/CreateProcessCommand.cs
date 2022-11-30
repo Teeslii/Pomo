@@ -27,10 +27,10 @@ namespace WebApi.Application.ProcessOperations.Command
             
             var minuteSet = _dbContext.MinuteSets.SingleOrDefault(command => command.Id == Model.MinuteSetId);
             double.TryParse(minuteSet.Minute.ToString(), out double minute);
-
-            process.StartTime.AddMinutes(minute);
-
-            process.StopTime = process.StartTime;
+            
+            process.EndTime = process.StartTime;
+            
+            process.EndTime = process.EndTime.AddMinutes(minute);
 
             _dbContext.Processes.Add(process);
             _dbContext.SaveChanges();
@@ -39,7 +39,7 @@ namespace WebApi.Application.ProcessOperations.Command
     }
     public class CreateProcessViewModel 
     {
-        public int MinuteTypeId { get; set;}
+        public MinuteType MinuteType { get; set;}
         public int MinuteSetId { get; set;}
         public Boolean IsCompleted  { get; set; }
         public int UserId { get; set; }

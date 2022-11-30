@@ -10,8 +10,8 @@ namespace WebApi.Application.ProcessOperations.Command
     {
         public CreateProcessCommandValidator()
         {
-            RuleFor(command => command.Model.MinuteTypeId).GreaterThanOrEqualTo(0);
-            RuleFor(command => command.Model.MinuteSetId ).GreaterThanOrEqualTo(0);
+           
+            RuleFor(command => command.Model.MinuteSetId ).GreaterThan(0);
             RuleFor(command => command.Model.IsCompleted).NotNull();
             RuleFor(command => command.Model.UserId).GreaterThan(0);
         }
