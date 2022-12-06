@@ -7,6 +7,7 @@ using WebApi.Application.MinuteSetOperations.Command;
 using WebApi.Application.MinuteSetOperations.Queries;
 using WebApi.Application.ProcessOperations.Command;
 using WebApi.Application.ProcessOperations.Queries.GetProcessByUserId;
+using WebApi.Application.UserOperations.Command.CreateUser;
 using WebApi.Entities;
 
 namespace WebApi.Common
@@ -19,6 +20,7 @@ namespace WebApi.Common
             CreateMap<CreateMinuteSetsViewModel, MinuteSet>();
             CreateMap<CreateProcessViewModel, Process>();
             CreateMap<Process, GetProcessByUserIdViewModel>().ForMember(dest => dest.MinuteSet, opt => opt.MapFrom(src => src.MinuteSet.Minute));
+            CreateMap<CreateUserViewModel, User>();
         }
     }
   }
