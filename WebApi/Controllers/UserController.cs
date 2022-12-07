@@ -8,6 +8,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebApi.Application.UserOperations.Command.CreateUser;
+using WebApi.Application.UserOperations.Command.DeleteUser;
 using WebApi.DBOperations;
 
 namespace WebApi.Controllers
@@ -37,6 +38,19 @@ namespace WebApi.Controllers
             return Ok();
         }
 
+        [HttpDelete("{userId}")]
+        public IActionResult Delete(int userId)
+        {
+            var command = new DeleteUserCommand(_dbContext);
+            command.UserId = userId;
+
+            var validations = new DeleteUserCommandValidator();
+            validations.ValidateAndThrow(command);
+
+            command.Handle();
+
+            return Ok();
+        }
       
     }
 }
