@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebApi.Application.UserOperations.Command.CreateUser;
 using WebApi.Application.UserOperations.Command.DeleteUser;
+using WebApi.Application.UserOperations.Queries;
 using WebApi.DBOperations;
 
 namespace WebApi.Controllers
@@ -47,9 +48,20 @@ namespace WebApi.Controllers
             var validations = new DeleteUserCommandValidator();
             validations.ValidateAndThrow(command);
 
-            command.Handle();
+             command.Handle();
 
             return Ok();
+        }
+
+        [HttpGet("{userId}")]
+        public IActionResult Get(int userId)
+        {
+            var query = new GetUserQuery(_dbContext, _mapper);
+            query.UserId = userId;
+
+            var result = query.Handle();
+
+            return Ok(result);
         }
       
     }
