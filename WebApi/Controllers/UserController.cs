@@ -7,10 +7,12 @@ using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using WebApi.Application.UserOperations.Command.CreateToken;
 using WebApi.Application.UserOperations.Command.CreateUser;
 using WebApi.Application.UserOperations.Command.DeleteUser;
 using WebApi.Application.UserOperations.Queries;
 using WebApi.DBOperations;
+using WebApi.TokenOperations.Models;
 
 namespace WebApi.Controllers
 {
@@ -20,6 +22,7 @@ namespace WebApi.Controllers
     {
         private readonly PomoDbContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _configuration;
         public UserController(PomoDbContext dbContext, IMapper mapper)
         {
            _dbContext = dbContext;
@@ -63,6 +66,19 @@ namespace WebApi.Controllers
 
             return Ok(result);
         }
-      
+
+        [HttpPost("connect/token")]
+        public ActionResult<Token> LoginUser([FromBody] CreateTokenViewModel login)
+        {
+            CreateTokenCommand command = new CreateTokenCommand(_dbContext, _mapper, _configuration);
+            command.ViewModel = login;
+
+            CreateTokanCommandValidator validations = new CreateTokanCommandValidator();
+            validations.ValidateAndThrow(command);
+
+            var token = command.Handle();
+
+            return token;
+        }
     }
 }

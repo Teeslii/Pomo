@@ -1,6 +1,9 @@
 using System.Reflection;
+using System.Text;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using WebApi.DBOperations;
 using WebApi.Middleware;
 
@@ -18,9 +21,20 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 builder.Services.AddDbContext<PomoDbContext>(options => 
    options.UseSqlServer(builder.Configuration.GetConnectionString("MasterDatabase")));
 
-
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt => {
+    opt.TokenValidationParameters = new TokenValidationParameters{
+        ValidateAudience = true,
+        ValidateIssuer = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Token:Issuer"],
+        ValidAudience = builder.Configuration["Token:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Token:SecurityKey"])),
+        ClockSkew = TimeSpan.Zero
+    };
+} );
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -34,7 +48,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

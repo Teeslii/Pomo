@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Application.ProcessOperations.Command;
 using WebApi.Application.ProcessOperations.Queries.GetProcessByUserId;
@@ -11,6 +12,7 @@ using WebApi.DBOperations;
 
 namespace WebApi.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class ProcessController : Controller
