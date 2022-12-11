@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using WebApi.Application.UserOperations.Command.CreateToken;
 using WebApi.Application.UserOperations.Command.CreateUser;
 using WebApi.Application.UserOperations.Command.DeleteUser;
+using WebApi.Application.UserOperations.Command.RefreshToken;
 using WebApi.Application.UserOperations.Queries;
 using WebApi.DBOperations;
 using WebApi.TokenOperations.Models;
@@ -79,6 +80,17 @@ namespace WebApi.Controllers
             var token = command.Handle();
 
             return token;
+        }
+
+        [HttpGet("refreshToken")]
+        public ActionResult<Token> RefreshToken([FromBody] string token)
+        {
+             RefreshTokenCommand command = new RefreshTokenCommand(_dbContext, _configuration);
+             command.RefreshToken = token;
+
+             var resultToken = command.Handle();
+            
+             return resultToken;
         }
     }
 }
