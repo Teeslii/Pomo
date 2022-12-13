@@ -7,6 +7,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Application.MinuteSetOperations.Command;
 using WebApi.Application.MinuteSetOperations.Command.CreateMinuteSet;
+using WebApi.Application.MinuteSetOperations.Command.DeleteMinuteSet;
 using WebApi.Application.MinuteSetOperations.Queries;
 using WebApi.DBOperations;
 
@@ -39,7 +40,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public IActionResult CreateMinuteSets([FromBody] CreateMinuteSetsViewModel model)
         {
-            CreateMinuteSetsCommand command = new CreateMinuteSetsCommand(_dbcontext, _mapper);
+            CreateMinuteSetCommand command = new CreateMinuteSetCommand(_dbcontext, _mapper);
             command.viewModel = model;
 
             CreateMinuteSetCommandValidator validator = new CreateMinuteSetCommandValidator();
@@ -47,6 +48,20 @@ namespace WebApi.Controllers
 
             command.Handle();
 
+            return Ok();
+        }
+
+        [HttpDelete("{minute}")]
+        public IActionResult DeleteMinuteSet(int minute)
+        {
+            DeleteMinuteSetCommand command = new DeleteMinuteSetCommand(_dbcontext);
+            command.Minute = minute;
+
+            DeleteMinuteSetCommandValidator validator = new DeleteMinuteSetCommandValidator();
+            validator.ValidateAndThrow(command);
+
+            command.Handle();
+            
             return Ok();
         }
 

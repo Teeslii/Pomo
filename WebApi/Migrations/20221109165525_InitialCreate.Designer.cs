@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApi.DBOperations;
 
@@ -11,9 +12,10 @@ using WebApi.DBOperations;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(PomoDbContext))]
-    partial class PomoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221109165525_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,9 +48,6 @@ namespace WebApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<bool>("IsCompleted")
                         .HasColumnType("bit");
 
@@ -58,7 +57,13 @@ namespace WebApi.Migrations
                     b.Property<int>("MinuteType")
                         .HasColumnType("int");
 
+                    b.Property<int>("MinuteTypeId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StopTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
