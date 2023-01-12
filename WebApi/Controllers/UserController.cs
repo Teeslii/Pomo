@@ -24,10 +24,11 @@ namespace WebApi.Controllers
         private readonly PomoDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
-        public UserController(PomoDbContext dbContext, IMapper mapper)
+        public UserController(PomoDbContext dbContext, IMapper mapper , IConfiguration configuration)
         {
            _dbContext = dbContext;
            _mapper = mapper;
+           _configuration = configuration;
         }
 
         [HttpPost]

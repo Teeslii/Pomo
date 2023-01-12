@@ -1,23 +1,20 @@
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 using WebApi.Entities;
 using WebApi.TokenOperations.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace WebApi.TokenOperations
 {
-    public class TokenHandler
+    public class TokenHandler : ITokenHandler
     {
-        public IConfiguration _configuration { get; set; }
+        private readonly IConfiguration _configuration;
         public TokenHandler(IConfiguration configuration)
         {
             _configuration = configuration;
         }
-  
+
         public Token CreateAccessToken(User user)
         {
             Token tokenModel = new Token();
@@ -35,9 +32,9 @@ namespace WebApi.TokenOperations
                 notBefore: DateTime.Now,
                 signingCredentials: credentials
             );
-            
+
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-            
+
             tokenModel.AccessToken = tokenHandler.WriteToken(securityToken);
             tokenModel.RefreshToken = CreateRefreshToken();
 
