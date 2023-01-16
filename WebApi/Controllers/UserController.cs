@@ -84,7 +84,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("refreshToken")]
-        public ActionResult<Token> RefreshToken([FromBody] string token)
+        public ActionResult<Token> RefreshToken([FromQuery] string token)
         {
              RefreshTokenCommand command = new RefreshTokenCommand(_dbContext, _configuration);
              command.RefreshToken = token;
