@@ -14,5 +14,7 @@ namespace WebApi.Entities
         public string UserName { get; set; }
         public string Password { get; set; }
         public ICollection<Process> processes { get; set; }
+        public string? RefreshToken { get; set; }
+        public DateTime? RefreshTokenExpireDate { get; set; }
     }
 }
