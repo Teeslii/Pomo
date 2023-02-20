@@ -20,6 +20,8 @@ namespace WebApi.Common
             CreateMap<User, GetUserQueryViewModel>().ForMember(dest => dest.processes, opt => opt.MapFrom(src => src.processes.ToList()));
             CreateMap<Process, GetUserQueryViewModel.ProcessVeiwModel>();
 
+            CreateMap<Process, GetProcessByUserIdViewModel>();
+
         }
     }
   }

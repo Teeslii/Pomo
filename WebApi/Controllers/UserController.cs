@@ -61,7 +61,7 @@ namespace WebApi.Controllers
         [HttpGet("{userId}")]
         public IActionResult Get(int userId)
         {
-            var query = new GetUserQuery(_dbContext, _mapper);
+            var query = new GetUserByIdQuery(_dbContext, _mapper);
             query.UserId = userId;
 
             var result = query.Handle();
