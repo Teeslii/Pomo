@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using WebApi.Application.MinuteSetOperations.Command;
-using WebApi.Application.MinuteSetOperations.Queries;
 using WebApi.Application.ProcessOperations.Command;
 using WebApi.Application.ProcessOperations.Queries.GetProcessByUserId;
 using WebApi.Application.UserOperations.Command.CreateUser;
@@ -17,14 +15,12 @@ namespace WebApi.Common
     {
         public MapperProfile()
         {
-            CreateMap<MinuteSet, MinuteSetsViewModel>();
-            CreateMap<CreateMinuteSetsViewModel, MinuteSet>();
             CreateMap<CreateProcessViewModel, Process>();
-            CreateMap<Process, GetProcessByUserIdViewModel>().ForMember(dest => dest.MinuteSet, opt => opt.MapFrom(src => src.MinuteSet.Minute));
-           
             CreateMap<CreateUserViewModel, User>();
             CreateMap<User, GetUserQueryViewModel>().ForMember(dest => dest.processes, opt => opt.MapFrom(src => src.processes.ToList()));
             CreateMap<Process, GetUserQueryViewModel.ProcessVeiwModel>();
+
+            CreateMap<Process, GetProcessByUserIdViewModel>();
 
         }
     }

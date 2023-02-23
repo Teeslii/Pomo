@@ -29,10 +29,10 @@ namespace WebApi.Application.UserOperations.Command.RefreshToken
 
             TokenHandler handler = new TokenHandler(_configuration);
 
-            Token token = handler.CreateAccessToken(user); // "?"
+            Token token = handler.CreateAccessToken(user);  
 
             user.RefreshToken = token.RefreshToken;
-            user.RefreshTokenExpireDate = token.Expiration.AddMinutes(15); // "?"
+            user.RefreshTokenExpireDate = token.Expiration.AddMinutes(15);  
 
             _dbContext.SaveChanges();
 

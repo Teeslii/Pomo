@@ -8,13 +8,13 @@ using WebApi.DBOperations;
 
 namespace WebApi.Application.UserOperations.Queries
 {
-    public class GetUserQuery
+    public class GetUserByIdQuery
     {
         public int UserId { get; set; }
         private readonly PomoDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public GetUserQuery(PomoDbContext dbContext, IMapper mapper)
+        public GetUserByIdQuery(PomoDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
@@ -47,7 +47,6 @@ namespace WebApi.Application.UserOperations.Queries
             public DateTime EndTime { get; set; }
             public string MinuteType { get; set;}
             public int MinuteSet { get; set;}
-            public Boolean IsCompleted  { get; set; }
         }
     } 
 }

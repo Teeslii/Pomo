@@ -25,8 +25,7 @@ namespace WebApi.Application.ProcessOperations.Command
    
             process.StartTime = DateTime.Now;
             
-            var minuteSet = _dbContext.MinuteSets.SingleOrDefault(command => command.Id == Model.MinuteSetId);
-            double.TryParse(minuteSet.Minute.ToString(), out double minute);
+            double.TryParse(process.MinuteSet.ToString(), out double minute);
             
             process.EndTime = process.StartTime;
             
@@ -40,8 +39,7 @@ namespace WebApi.Application.ProcessOperations.Command
     public class CreateProcessViewModel 
     {
         public MinuteType MinuteType { get; set;}
-        public int MinuteSetId { get; set;}
-        public Boolean IsCompleted  { get; set; }
+        public int MinuteSet { get; set;}
         public int UserId { get; set; }
     }
 }

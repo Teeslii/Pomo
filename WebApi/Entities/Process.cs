@@ -9,9 +9,7 @@ namespace WebApi.Entities
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public MinuteType MinuteType { get; set;}
-        public int MinuteSetId { get; set;}
-        public MinuteSet MinuteSet { get; set;}
-        public Boolean IsCompleted  { get; set; }
+        public int MinuteSet { get; set;}
         public int UserId { get; set; }
         public User User { get; set; }
     }

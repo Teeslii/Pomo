@@ -9,10 +9,8 @@ namespace WebApi.Application.ProcessOperations.Command
     public class CreateProcessCommandValidator : AbstractValidator<CreateProcessCommand>
     {
         public CreateProcessCommandValidator()
-        {
-           
-            RuleFor(command => command.Model.MinuteSetId ).GreaterThan(0);
-            RuleFor(command => command.Model.IsCompleted).NotNull();
+        {   
+            RuleFor(command => command.Model.MinuteSet).GreaterThan(0);
             RuleFor(command => command.Model.UserId).GreaterThan(0);
         }
     }

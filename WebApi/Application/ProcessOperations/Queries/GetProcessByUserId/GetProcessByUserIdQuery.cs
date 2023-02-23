@@ -21,9 +21,7 @@ namespace WebApi.Application.ProcessOperations.Queries.GetProcessByUserId
 
         public List<GetProcessByUserIdViewModel> Handler()
         {
-            var process = _dbContext.Processes.Include(x => x.MinuteSet).Include(x => x.User).Where(x => x.UserId == UserId);
-             
-            
+            var process = _dbContext.Processes.Include(x => x.User).Where(x => x.UserId == UserId);
 
             var mappingProcess = _mapper.Map<List<GetProcessByUserIdViewModel>>(process);   
 
@@ -38,6 +36,6 @@ namespace WebApi.Application.ProcessOperations.Queries.GetProcessByUserId
         public DateTime EndTime { get; set; }
         public string MinuteType { get; set;}
         public int MinuteSet { get; set;}
-        public Boolean IsCompleted  { get; set; }
+       
     }
 }
