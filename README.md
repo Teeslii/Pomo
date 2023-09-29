@@ -9,8 +9,6 @@ Aims for you to work continuously and efficiently by taking a break.
 - [ ] Break Timer
 - [ ] Change Time
 - [ ] Create User
-- [ ] Unit Test
-- [ ] Deploy
+- [ ] <a href="https://github.com/Teeslii/PomoApp">Mobile App Integration</a>
 
-### Trello Board :paperclip: 
-![image](https://user-images.githubusercontent.com/60256102/191055512-d40c30aa-93ee-4e09-bc71-9b05073628c6.png)
+
